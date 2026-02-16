@@ -29,10 +29,12 @@ def Quiz():
                 continue
             if int(resposta) > len(o['Opcoes']) or int(resposta) <= 0:
                 os.system('cls' if os.name == 'nt' else 'clear')
-                print('Opçao escolhida nao existe')
+                print('Opçao escolhida NAO existe')
+                print(('-')* 100)
                 continue
             if str(resposta) == o['Resposta']:
                 print('Voce acertou!!')
+                print(('-')* 100)
                 contador += 1
             else:
                 print(f'Voce errou, resposta certa era {o["Resposta"]} !!')
@@ -41,4 +43,5 @@ def Quiz():
             os.system('cls' if os.name == 'nt' else 'clear')
             break
     print(f'Parabens voce acertou: {contador}/{len(questoes)}')
+
 Quiz()
