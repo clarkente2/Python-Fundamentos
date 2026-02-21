@@ -64,7 +64,6 @@ def calculadora():
             print('Não é possível dividir por zero.')
 
 calculadora()
-        else:
-            print(f'Resultado: {n1 / n2}')
 
     
+
