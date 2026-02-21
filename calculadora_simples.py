@@ -1,39 +1,70 @@
 
 # Calculadora simples
 
-while True:
-    sair= input('deseja prosseguir "s" ou "n": ').lower()
-    if sair == 'n':
-        print ('saindo...')
-        break
-    if sair not in ['s', 'n']:
-        print('responda apenas com "s" ou "n"')
-        continue
+import os
 
-    valor1= input('digite o primeiro valor: ')
-    valor2= input('digite o segundo valor: ')
-    operador= input('digite um operador (+-/*): ')
-    operador_permitido = '+-/*'
-    if operador not in operador_permitido:
-        print('digite apenas um dos operadores selecionados: +-/*')
-        continue
-    try:
-        n1= float(valor1)
-        n2= float(valor2)
+def calculadora():
 
-    except ValueError:
-        print('digite apenas numeros')
-        continue
+    operacoes = {
+        '+': lambda a, b: a + b,
+        '-': lambda a, b: a - b,
+        '*': lambda a, b: a * b,
+        '/': lambda a, b: a / b
+    }
 
-    if operador == '+':
-        print(f'Resultado: {n1 + n2}')
-    elif operador == '-':
-        print(f'Resultado: {n1 - n2}')
-    elif operador == '*':
-        print(f'Resultado: {n1 * n2}')
-    elif operador == '/':
-        if n2 == 0:
-            print(" Erro: Não é possível dividir por zero!")
+    while True:
+
+        print(
+            '\nOperadores disponíveis:'
+            '\n+ = soma'
+            '\n- = subtração'
+            '\n* = multiplicação'
+            '\n/ = divisão'
+            '\nFormato: 2+2\n'
+        )
+
+        calculo = input('Digite o cálculo: ').replace(' ', '')
+
+        if not calculo:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('Digite algo.')
+            continue
+
+        operador = None
+
+        for op in operacoes:
+            if op in calculo:
+                operador = op
+                break
+
+        if operador is None:
+            os.system('cls' if os.name == 'nt' else 'clear')
+            print('Operador inválido.')
+            continue
+
+        try:
+
+            parte1, parte2 = calculo.split(operador)
+
+            numero1 = float(parte1)
+            numero2 = float(parte2)
+
+            resultado = operacoes[operador](numero1, numero2)
+
+            os.system('cls' if os.name == 'nt' else 'clear')
+
+            print(f'{calculo} = {resultado}')
+
+            break
+
+        except ValueError:
+            print('Formato inválido. Ex: 10+10')
+
+        except ZeroDivisionError:
+            print('Não é possível dividir por zero.')
+
+calculadora()
         else:
             print(f'Resultado: {n1 / n2}')
+
     
